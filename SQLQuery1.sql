@@ -24,3 +24,30 @@ start_date datetime
   update employee set emp_name='sweta' where emp_id=4
 
   Delete from employee where emp_id=3
+
+   /* Constraints PK,FK */
+  create table company
+(	
+	comp_id int primary key,
+	comp_name varchar(50),
+	emp_id int foreign key references employee(emp_id)
+)
+select * from company
+insert into company(comp_id,comp_name,emp_id)values(1,'Bridgelab',1)
+insert into company(comp_id,comp_name,emp_id)values(2,'HCL',1)
+insert into company(comp_id,comp_name,emp_id)values(3,'HP',2)
+
+/* Table level constraint */
+create table demoTableLevel
+(
+	id int primary key,
+	teacherID int,
+	subjects varchar(55),
+	constraint StudID_Sub unique(teacherID,subjects)
+)
+insert into demoTableLevel(id,teacherID,Subjects)values(1,22,'CS')
+insert into demoTableLevel(id,teacherID,Subjects)values(2,22,'DV')
+insert into demoTableLevel(id,teacherID,Subjects)values(3,23,'EV')
+insert into demoTableLevel(id,teacherID,Subjects)values(4,25,'EV')
+insert into demoTableLevel(id,teacherID,Subjects)values(5,25,'MC')
+select * from demoTableLevel
