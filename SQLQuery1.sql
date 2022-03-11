@@ -61,3 +61,14 @@ select * from employee where emp_id=2 order by emp_name desc
 select * from employee order by emp_name desc
 select comp_name from company GROUP BY comp_name
 select emp_name from employee GROUP BY emp_name
+
+
+/* SUB-QUERIES*/
+select * from employee
+where emp_id=(select emp_id from company where comp_name='Bridgelab' and comp_id=1)
+
+select * from company
+select top 2 percent * from employee
+
+select * from employee
+where emp_id IN(select emp_id from company where emp_id=1)
