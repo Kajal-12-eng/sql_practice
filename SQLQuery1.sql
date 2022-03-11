@@ -51,3 +51,13 @@ insert into demoTableLevel(id,teacherID,Subjects)values(3,23,'EV')
 insert into demoTableLevel(id,teacherID,Subjects)values(4,25,'EV')
 insert into demoTableLevel(id,teacherID,Subjects)values(5,25,'MC')
 select * from demoTableLevel
+
+/* Where,orderby,group by clause*/
+select * from employee where emp_id=1
+select * from employee where emp_salary=12000
+select * from employee where emp_salary>10000
+select emp_name from employee where emp_salary=12000
+select * from employee where emp_id=2 order by emp_name desc
+select * from employee order by emp_name desc
+select comp_name from company GROUP BY comp_name
+select emp_name from employee GROUP BY emp_name
