@@ -72,3 +72,26 @@ select top 2 percent * from employee
 
 select * from employee
 where emp_id IN(select emp_id from company where emp_id=1)
+
+
+/* joints*/
+/* Inner joint*/
+SELECT * FROM EMPLOYEE
+SELECT * FROM COMPANY
+
+SELECT * FROM EMPLOYEE INNER JOIN  COMPANY
+ON EMPLOYEE.emp_id = COMPANY.emp_id
+
+SELECT emp_name,emp_salary,comp_name FROM EMPLOYEE INNER JOIN  COMPANY
+ON EMPLOYEE.emp_id = COMPANY.emp_id
+
+/* Right outer join*/
+SELECT * FROM EMPLOYEE E RIGHT OUTER JOIN  COMPANY C
+ON E.emp_id = C.emp_id
+
+SELECT E.*,C.comp_name FROM EMPLOYEE E RIGHT OUTER JOIN  COMPANY C
+ON E.emp_id = C.emp_id
+
+/*  outer join*/
+SELECT * FROM EMPLOYEE E FULL OUTER JOIN  COMPANY C
+ON E.emp_id = C.emp_id
