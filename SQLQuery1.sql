@@ -177,5 +177,15 @@ create nonclustered index nonCLIDX_Empdetail on table_employee (name asc,gender)
 
 select * from table_employee
 
+     /* view*/
+create view viewemployee
+as
+select Employee_Name,Department_Name,Gender_Name
+from Employees
+join Department on Employees.Department_ID = Department.Department_ID
+join  Genders on Employees.Gender_ID = Genders.Gender_ID
+where Department.Department_Name='CSE'
+
+select * from viewemployee
 
 
