@@ -95,3 +95,61 @@ ON E.emp_id = C.emp_id
 /*  outer join*/
 SELECT * FROM EMPLOYEE E FULL OUTER JOIN  COMPANY C
 ON E.emp_id = C.emp_id
+
+/* Multiple  join*/
+create table Department
+(
+	Department_ID int primary key,
+	Department_Name varchar(20)
+)
+select * from Department
+insert into Department(Department_ID,Department_Name)values(1,'CSE')
+insert into Department(Department_ID,Department_Name)values(2,'ME')
+insert into Department(Department_ID,Department_Name)values(3,'EEE')
+insert into Department(Department_ID,Department_Name)values(4,'CIVIL')
+
+create table Genders
+(
+	Gender_ID int primary key,
+	Gender_Name varchar(20)
+)
+insert into Genders(Gender_ID,Gender_Name)values(1,'M')
+insert into Genders(Gender_ID,Gender_Name)values(2,'F')
+select * from Genders
+create table Employees
+(
+	Employee_ID int primary key,
+	Employee_Name varchar(55),
+	Department_ID int foreign key references Department(Department_ID),
+	Gender_ID int foreign key references Genders(Gender_ID)
+)
+select * from Employees
+insert into Employees(Employee_ID,Employee_Name,Department_ID,Gender_ID)values(1,'Deepika',1,1)
+insert into Employees(Employee_ID,Employee_Name,Department_ID,Gender_ID)values(2,'Kajal',1,2)
+insert into Employees(Employee_ID,Employee_Name,Department_ID,Gender_ID)values(3,'Priyanka',2,1)
+insert into Employees(Employee_ID,Employee_Name,Department_ID,Gender_ID)values(4,'Ayush',3,2)
+insert into Employees(Employee_ID,Employee_Name,Department_ID,Gender_ID)values(5,'Sweta',4,1)
+insert into Employees(Employee_ID,Employee_Name,Department_ID,Gender_ID)values(6,'Saket',2,1)
+
+select Employee_Name,Department_Name,Gender_Name
+from Employees
+join Department on Employees.Department_ID = Department.Department_ID
+join  Genders on Employees.Gender_ID = Genders.Gender_ID
+
+
+select Employee_Name,Department_Name,Gender_Name
+from Employees
+join Department on Employees.Department_ID = Department.Department_ID
+join  Genders on Employees.Gender_ID = Genders.Gender_ID
+order by Employee_Name asc
+
+
+select Department_Name,Gender_Name, count(*) as TotalEmployee
+from Employees
+join Department on Employees.Department_ID = Department.Department_ID
+join  Genders on Employees.Gender_ID = Genders.Gender_ID
+group by Department_Name,Gender_Name
+
+
+
+
