@@ -150,6 +150,32 @@ join Department on Employees.Department_ID = Department.Department_ID
 join  Genders on Employees.Gender_ID = Genders.Gender_ID
 group by Department_Name,Gender_Name
 
+					------------Indexing--------------
+create table table_employee
+(
+	id int primary key,
+	name varchar(20),
+	salary int ,
+	gender varchar(20)
+)
+-- drop table table_employee
+
+insert into table_employee(id,name,salary,gender)values(1,'shalini',2500,'F')
+insert into table_employee(id,name,salary,gender)values(3,'sweta',5500,'F')
+insert into table_employee(id,name,salary,gender)values(2,'Akansha',2550,'F')
+insert into table_employee(id,name,salary,gender)values(5,'Ayushi',1500,'F')
+insert into table_employee(id,name,salary,gender)values(4,'priyanka',9500,'F')
+
+select * from table_employee where id=5 
+			---------------without indexing-----------
+create index IX_tbleemployee_salary on table_employee (salary asc)
+drop index If exists tbleemployee.IX_tbleemployee_salary
+
+				------------After indexing-----------
+
+create nonclustered index nonCLIDX_Empdetail on table_employee (name asc,gender)
+
+select * from table_employee
 
 
 
