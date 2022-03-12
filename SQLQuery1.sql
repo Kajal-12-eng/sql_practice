@@ -178,4 +178,40 @@ create nonclustered index nonCLIDX_Empdetail on table_employee (name asc,gender)
 select * from table_employee
 
 
+							/* Delete Cascade*/
+create table customers
+(
+	cus_ID int primary key,
+	cust_Name varchar (55)
+)
+insert into customers(cus_ID,cust_Name)values(1,'kajal')
+insert into customers(cus_ID,cust_Name)values(2,'sweta')
+insert into customers(cus_ID,cust_Name)values(3,'ayush')
+
+create table orders
+(
+	order_ID int identity(1,1) primary key,
+	cus_ID int,
+	product_items varchar(125),
+	foreign key (cus_ID) references customers(cus_ID)
+	On delete set null
+)
+insert into orders(cus_ID,product_items)values(1,'iphone')
+insert into orders(cus_ID,product_items)values(2,'samsung')
+insert into orders(cus_ID,product_items)values(3,'one plus')
+select * from customers
+select * from orders
+delete from customers where cus_ID=3
+
+  /* Update Cascade*/
+drop table orders
+create table orders
+(
+	order_ID int identity(1,1) primary key,
+	cus_ID int,
+	product_items varchar(55),
+	foreign key (cus_ID) references customers(cus_ID)
+	On update Cascade
+)
+update orders set cus_ID=3 where order_ID=1
 
