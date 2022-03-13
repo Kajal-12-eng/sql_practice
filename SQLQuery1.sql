@@ -133,24 +133,23 @@ insert into Employees(Employee_ID,Employee_Name,Department_ID,Gender_ID)values(6
 
 select Employee_Name,Department_Name,Gender_Name
 from Employees
-join Department on Employees.Department_ID = Department.Department_ID
-join  Genders on Employees.Gender_ID = Genders.Gender_ID
+inner join Department on Employees.Department_ID = Department.Department_ID
+inner join  Genders on Employees.Gender_ID = Genders.Gender_ID
 
 
 select Employee_Name,Department_Name,Gender_Name
 from Employees
-join Department on Employees.Department_ID = Department.Department_ID
-join  Genders on Employees.Gender_ID = Genders.Gender_ID
+inner join Department on Employees.Department_ID = Department.Department_ID
+inner join  Genders on Employees.Gender_ID = Genders.Gender_ID
 order by Employee_Name asc
 
 
 select Department_Name,Gender_Name, count(*) as TotalEmployee
 from Employees
-join Department on Employees.Department_ID = Department.Department_ID
-join  Genders on Employees.Gender_ID = Genders.Gender_ID
+inner join Department on Employees.Department_ID = Department.Department_ID
+inner join  Genders on Employees.Gender_ID = Genders.Gender_ID
 group by Department_Name,Gender_Name
-
-					------------Indexing--------------
+            /* Indexing*/
 create table table_employee
 (
 	id int primary key,
@@ -168,14 +167,24 @@ insert into table_employee(id,name,salary,gender)values(4,'priyanka',9500,'F')
 
 select * from table_employee where id=5 
 			---------------without indexing-----------
-create index IX_tbleemployee_salary on table_employee (salary asc)
-drop index If exists tbleemployee.IX_tbleemployee_salary
+create clustered index CLIDX_table_employee_salary on table_employee (salary asc)
+drop index If exists table_employee.IX_table_employee_salary
 
 				------------After indexing-----------
 
 create nonclustered index nonCLIDX_Empdetail on table_employee (name asc,gender)
 
 select * from table_employee
+/* View */
+Create View view_employees
+as
+select Employee_Name,Department_Name,Gender_Name
+from Employees 
+inner join Department on Employees.Department_ID = Department.Department_ID
+inner join  Genders on Employees.Gender_ID = Genders.Gender_ID
+where Department.Department_Name='CSE'
+
+select * from view_employees
 
 
 							/* Delete Cascade*/
@@ -214,4 +223,32 @@ create table orders
 	On update Cascade
 )
 update orders set cus_ID=3 where order_ID=1
+
+
+/* stored procedure*/
+
+create table tb_students(id int,name varchar(20),branch varchar(20))
+
+insert into tb_students values(1,'simani','ME')
+insert into tb_students values(2,'manisha','CSE')
+insert into tb_students values(3,'sushmita','EE')
+insert into tb_students values(4,'sadhna','CSE')
+insert into tb_students values(1,'akshita','CSE')
+insert into tb_students values(2,'pratiksha','CSE')
+
+select * from tb_students
+
+
+--create sp
+create procedure sp_students
+as
+Begin
+select * from tb_students where id=1
+End
+
+-- execute sp
+Execute sp_students
+
+
+
 
